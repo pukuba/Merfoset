@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = {
+const logic = {
     checkToken: async(token) =>{
         let ret = 0;
         try{
@@ -11,10 +11,10 @@ module.exports = {
         return ret
     },
     
-    getToken: (id) => {
+    getToken: (name) => {
         return jwt.sign({
-            id: id,
-            exp:Math.floor(Date.now() / 1000) + (60 * 60),
+            name : name
         },process.env.JWT_SECRET)
     }
 }
+module.exports = logic

@@ -1,5 +1,5 @@
-const auth = require('./auth')
+const Token = require('./auth')
 
 module.exports = {
-    auth
+    Token
 }
