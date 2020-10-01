@@ -1,3 +1,14 @@
+type Member{
+    code: Int!
+    token: String
+}
+
 type Query{
-    test: String!
+    idCheck(id:String!): Boolean
+    nameCheck(name:String!): Boolean
+    login(id:String!, pw:String!): Member
+}
+
+type Mutation{
+    register(name:String!, id:String!, pw:String!): Member
 }

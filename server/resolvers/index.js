@@ -1,9 +1,9 @@
 const Query = require('./Query')
-
-
+const Mutation = require('./Mutation')
 
 const resovlers = {
-    Query
+    Query,
+    Mutation
 }
 
 module.exports = resovlers
