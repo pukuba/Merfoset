@@ -53,6 +53,8 @@ const start = async() => {
 
     app.get('/playground',expressPlayground({endpoint:'/graphql'}))
 
+    app.use('/class/',express.static(path.join(__dirname,'image/class')))
+
     const httpServer = createServer(app)
 
     server.installSubscriptionHandlers(httpServer)

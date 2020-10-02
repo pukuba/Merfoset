@@ -11,9 +11,11 @@ const logic = {
         return ret
     },
     
-    getToken: (name) => {
+    getToken: (name, rate, tier) => {
         return jwt.sign({
-            name : name
+            name : name,
+            rated :rate,
+            class : tier
         },process.env.JWT_SECRET)
     }
 }

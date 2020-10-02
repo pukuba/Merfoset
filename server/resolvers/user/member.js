@@ -1,6 +1,7 @@
 const Auth = require('../auth')
 const crypto = require('crypto');
-const { login } = require('../Query');
+
+const { uploadStream } = require('../../lib')
 
 const canchar = "!@#$%^&*()-_=+/?.>,<;:[{]}"
 
@@ -24,10 +25,11 @@ const logic = {
             pw : crypto.createHash("sha512").update(args.pw + seed).digest('hex'),
             seed : seed,
             rated : 1000,
+            class : 1,
             inGame : 0,
         })
         return{
-            token : Auth.Token.getToken(args.name),
+            token : Auth.Token.getToken(args.name,1000,1),
             code : 200
         }
     },
@@ -54,6 +56,10 @@ const logic = {
             }
         }
         return { code : 401}
+    },
+
+    async leaderBoard(parent, args, {db}){
+        return await db.collection('user').find().sort({'rated': -1}).limit(20).toArray()
     }
 }
 

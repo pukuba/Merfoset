@@ -3,10 +3,20 @@ type Member{
     token: String
 }
 
+type User{
+    code: Int!
+}
+type LeaderUser{
+    name: String
+    class: Int
+    rated: Int
+}
+
 type Query{
     idCheck(id:String!): Boolean
     nameCheck(name:String!): Boolean
     login(id:String!, pw:String!): Member
+    leaderBoard: [LeaderUser]
 }
 
 type Mutation{
