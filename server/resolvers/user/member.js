@@ -15,7 +15,7 @@ const logic = {
     async signUp(parent,args, {db}){
         const cnt1 = await db.collection('user').findOne({name:args.name})
         const cnt2 = await db.collection('user').findOne({id:args.id})
-        if(cnt1 || cnt2 || args.id.length < 6 || args.pw.length < 6 || args.name < 1) return {code : 409}
+        if(cnt1 || cnt2 || args.id.length < 6 || args.pw.length < 6 || args.name < 2) return {code : 409}
         for(const x of args.id) if(!canId(x)) return {code : 409}
         for(const x of args.pw) if(!canPw(x) && !canId(x)) return {code : 409}
         const seed = Math.round((new Date().valueOf() * Math.random())) + ""
@@ -36,13 +36,13 @@ const logic = {
 
     async nameCheck(parent, args, {token, db}){
         const cnt = await db.collection('user').findOne({name : args.name})
-        if(cnt) return false
+        if(cnt || args.name < 2) return false
         return true
     },
 
     async idCheck(parent, args, {token, db}){
         const cnt = await db.collection('user').findOne({id : args.id})
-        if(cnt) return false
+        if(cnt || args.id < 6) return false
         return true
     },
 
