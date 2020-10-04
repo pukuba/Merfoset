@@ -6,10 +6,18 @@ type Member{
 type User{
     code: Int!
 }
+
 type LeaderUser{
     name: String
     class: Int
     rated: Int
+}
+
+type SearchName{
+    name: String
+    class: Int
+    rated: Int
+    code: Int
 }
 
 type Query{
@@ -17,6 +25,7 @@ type Query{
     nameCheck(name:String!): Boolean
     login(id:String!, pw:String!): Member
     leaderBoard: [LeaderUser]
+    searchName(name:String!): SearchName
 }
 
 type Mutation{

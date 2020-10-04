@@ -1,5 +1,5 @@
-const user = require('./user')
+const User = require('./user')
 
 module.exports = {
-    register:(parent, args, {db,token}) => user.Member.signUp(parent,args,{db})
+    register:(parent, args, {db,token}) => User.Member.signUp(parent,args,{db})
 }

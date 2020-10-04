@@ -38,7 +38,7 @@ const start = async() => {
         },
         context: async({ req }) => {
             const token = req ? req.headers.authorization : ''
-            const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress
+            const ip = req ? req.connection.remoteAddress : ''
             return {db, token, ip, pubsub}
         },
         validationRules: [

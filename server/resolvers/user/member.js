@@ -1,8 +1,6 @@
 const Auth = require('../auth')
 const crypto = require('crypto');
 
-const { uploadStream } = require('../../lib')
-
 const canchar = "!@#$%^&*()-_=+/?.>,<;:[{]}"
 
 const canId = (x) => 'a'<=x && x<= 'z' || 'A'<=x && x<='Z' || '0' <= x && x<='9'
