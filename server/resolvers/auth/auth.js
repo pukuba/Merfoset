@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const logic = {
-    checkToken: async(token) =>{
+    check: async(token) =>{
         let ret = 0;
         try{
             ret = jwt.verify(token,process.env.JWT_SECRET)
@@ -11,11 +11,11 @@ const logic = {
         return ret
     },
     
-    getToken: (name, rate, tier) => {
+    get: (name, status , channel) => {
         return jwt.sign({
             name : name,
-            rated :rate,
-            class : tier
+            status : status,
+            channel : channel
         },process.env.JWT_SECRET)
     }
 }

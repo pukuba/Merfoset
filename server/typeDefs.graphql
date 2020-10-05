@@ -7,6 +7,12 @@ type User{
     code: Int!
 }
 
+type Chat{
+    name: String
+    message: String
+    code: Int!
+}
+
 type LeaderUser{
     name: String
     class: Int
@@ -30,4 +36,9 @@ type Query{
 
 type Mutation{
     register(name:String!, id:String!, pw:String!): Member
+    chat(message:String): Chat
+}
+
+type Subscription{
+    newChat: Chat
 }
