@@ -28,18 +28,27 @@ const start = async() => {
     )
     
     const db = client.db()
-
+    
     const server = new ApolloServer({
         typeDefs,
         resolvers,
+        subscriptions:{
+            onConnect: (req, websocket) => {
+                if(req){
+                    return {token : req.Authorization}
+                }
+                throw new Error ("Missing token!")
+            }
+        },
         engine: {
             reportSchema: true,
             variant: process.env.APOLLO_KEY
         },
-        context: async({ req }) => {
+        context: async({ req,connection }) => {
             const token = req ? req.headers.authorization : ''
             const ip = req ? req.connection.remoteAddress : ''
-            return {db, token, ip, pubsub}
+            const subToken =  connection ? connection.context.token : ''
+            return {db, token, ip ,pubsub, subToken}
         },
         validationRules: [
             depthLimit(7),

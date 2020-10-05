@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const logic = {
-    check: async(token) =>{
+    check: async(token) => {
+        console.log(token)
         let ret = 0;
         try{
             ret = jwt.verify(token,process.env.JWT_SECRET)

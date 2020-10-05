@@ -13,8 +13,8 @@ const logic = {
         return newChat
     },
 
-    newChat(parent, args, { pubsub,token }){
-        const userState = auth.Token.check(token)
+    newChat: async(parent, args, { subToken,pubsub }) => {
+        const userState = await auth.Token.check(subToken)
         if(userState === 401) throw new Error('Unauthenticated!!')
         return pubsub.asyncIterator('chat-added' + userState.channel)
     },
