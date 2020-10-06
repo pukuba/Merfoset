@@ -15,7 +15,7 @@ const logic = {
     get: (name, status , channel) => {
         return jwt.sign({
             name : name,
-            status : status,
+            status : status, // 1,2 매칭 3,4 인겜
             channel : channel
         },process.env.JWT_SECRET)
     }

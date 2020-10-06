@@ -3,7 +3,7 @@ const auth = require('../auth')
 const logic = {
     chat: async(parent,args,{token,pubsub}) =>{
         const userState = await auth.Token.check(token)
-        if(userState === 401) return {code : 401}
+        if(userState === 401) {code : 401}
         const newChat = {
             name : userState.name,
             message : args.message,
@@ -15,7 +15,7 @@ const logic = {
 
     newChat: async(parent, args, { subToken,pubsub }) => {
         const userState = await auth.Token.check(subToken)
-        if(userState === 401) throw new Error('Unauthenticated!!')
+        if(userState === 401) throw new Error('Token not valid')
         return pubsub.asyncIterator('chat-added' + userState.channel)
     },
 }

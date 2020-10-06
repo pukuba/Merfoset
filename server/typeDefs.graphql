@@ -37,6 +37,7 @@ type Query{
 type Mutation{
     register(name:String!, id:String!, pw:String!): Member
     chat(message:String): Chat
+    normalQueue: String
 }
 
 type Subscription{
