@@ -39,13 +39,13 @@ const logic = {
 
     async nameCheck(parent, args, {token, db}){
         const cnt = await db.collection('user').findOne({name : args.name})
-        if(cnt || args.name < 2) return false
+        if(cnt || args.name.length < 2) return false
         return true
     },
 
     async idCheck(parent, args, {token, db}){
         const cnt = await db.collection('user').findOne({id : args.id})
-        if(cnt || args.id < 6) return false
+        if(cnt || args.id.length < 6) return false
         return true
     },
 
