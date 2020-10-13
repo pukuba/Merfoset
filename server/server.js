@@ -16,6 +16,10 @@ const { createComplexityLimitRule } = require('graphql-validation-complexity')
 const resolvers = require('./resolvers')
 const typeDefs = readFileSync('./typeDefs.graphql','utf-8')
 
+const auth = require('./resolvers/auth')
+
+const normalQueue = 1, rankQueue = 2, normalInGame = 3, rankInGame = 4
+
 const start = async() => {
     const app = express()
     const pubsub = new PubSub()
@@ -38,6 +42,19 @@ const start = async() => {
                     return {token : req.Authorization}
                 }
                 throw new Error ("Missing token!")
+            },
+            
+            onDisconnect: async(webSocket,context) => {
+                const getPromise = await context.initPromise
+                const token = await auth.Token.check(getPromise.token)
+                console.log(token)
+                if(token.status === normalQueue || token.status === rankQueue) db.collection('status').updateOne({name : token.name},{$set:{state:0}})
+                else if(token.status === normalInGame) db.collection('status').updateOne({name : token.name},{$set:{state : 0, channel : 0}})
+                else if(token.status === rankInGame){
+                    const user = await db.collection('user').findOne({name : token.name})
+                    updateLated(name.name, user.rated, -100, db)
+                }
+
             }
         },
         engine: {

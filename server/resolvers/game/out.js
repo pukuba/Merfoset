@@ -1,6 +1,5 @@
 const auth = require('../auth')
-
-const rand = (min, max) => Math.floor(Math.random() * (max - min)) + min
+const { rand } = require('../../lib')
 
 const logic = {
     normalQueue: async(parent, args, {db,token}) => {
