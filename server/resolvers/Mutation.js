@@ -1,8 +1,5 @@
-const User = require('./user')
-const Game = require('./game')
+const { endGame } = require('./game')
 
 module.exports = {
-    register:(parent, args, {db}) => User.Member.signUp(parent,args,{db}),
-    chat:(parent, args, {db, token, pubsub }) => Game.Other.chat(parent, args, {token, pubsub}),
-    normalQueue:(parent, args, { db,token }) => Game.Out.normalQueue(parent,args, {token, db})
+    endGame: (parent,args,{ db }) => endGame(parent,args,{ db })
 }

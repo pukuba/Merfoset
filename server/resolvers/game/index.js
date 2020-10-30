@@ -1,6 +1,3 @@
-const Other = require('./other')
-const Out = require('./out')
-module.exports = {
-    Other,
-    Out
-}
+const { endGame } = require('./game')
+
+module.exports = { endGame }

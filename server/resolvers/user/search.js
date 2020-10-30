@@ -1,14 +1,5 @@
-const logic = {
-    async leaderBoard(parent, args, {db}){
-        return await db.collection('user').find().sort({'rated': -1}).limit(20).toArray()
-    },
-    
-    async Name(parent, args, {db}){
-        let result = await db.collection('user').findOne({'name' : args.name})
-        if(result) result.code = 200
-        else return {code : 412}
-        return result
-    }
-}
+const scoreBoard = async(parent, args ,{ db}) => await db.collection('scoreBoard').find().sort({"score":-1}).limit(10).toArray()
 
-module.exports = logic
+const searchUser = async(parent, args, { db}) => await db.collection('scoreBoard').find({name : args.name}).sort({"score":-1}).limit(10).toArray()
+
+module.exports = {scoreBoard,searchUser}

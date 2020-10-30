@@ -1,7 +1,6 @@
-const Member = require('./member')
-const Search = require('./search')
+const {scoreBoard, searchUser} = require('./search')
 
 module.exports = {
-    Member,
-    Search
+    scoreBoard,
+    searchUser
 }

@@ -15,11 +15,9 @@ const uploadStream = (stream, path) =>
 
 const rand = (min, max) => Math.floor(Math.random() * (max - min)) + min
 
-const updateLated = (name, rated, k, db) => {
-    let a = rated / 200, b = (rated + k) / 200
-    a = a < 6 ? 1 : a-5, b = b < 6 ? 1 : b - 5
-    if(a != b) db.collection('user').updateOne({name:name},{$set:{rated : rated + k, class : b}})
-    else db.collection('user').updateOne({name:name},{$set:{rated : rated + k}})
-}
+const month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+const monthMap = new Map()
 
-module.exports = { uploadStream, rand, updateLated }
+for(let i = 0; i < 12; i++) monthMap.set(month[i], i + 1)
+
+module.exports = { uploadStream, rand, monthMap }

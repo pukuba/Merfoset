@@ -1,45 +1,18 @@
-type Member{
-    code: Int!
-    token: String
-}
-
-type User{
+type Result{
     code: Int!
 }
 
-type Chat{
-    name: String
-    message: String
-    code: Int!
-}
-
-type LeaderUser{
-    name: String
-    class: Int
-    rated: Int
-}
-
-type SearchName{
-    name: String
-    class: Int
-    rated: Int
-    code: Int
-}
-
-type Query{
-    idCheck(id:String!): Boolean
-    nameCheck(name:String!): Boolean
-    login(id:String!, pw:String!): Member
-    leaderBoard: [LeaderUser]
-    searchName(name:String!): SearchName
+type BoardResult{
+    name: String,
+    date: String,
+    score: Int,
 }
 
 type Mutation{
-    register(name:String!, id:String!, pw:String!): Member
-    chat(message:String): Chat
-    normalQueue: String
+    endGame(name:String!, score:Int!): Result
 }
 
-type Subscription{
-    newChat: Chat
+type Query{
+    scoreBoard: [BoardResult]
+    searchUser(name:String): [BoardResult]
 }
