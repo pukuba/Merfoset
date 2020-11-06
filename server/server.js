@@ -46,11 +46,7 @@ const start = async() => {
             reportSchema: true,
             variant: process.env.APOLLO_KEY
         },
-        context: async({ req,connection }) => {
-            const token = req ? req.headers.authorization : ''
-            const subToken =  connection ? connection.context.token : ''
-            return {db, token, pubsub, subToken}
-        },
+        context: {db},
         validationRules: [
             depthLimit(7),
             createComplexityLimitRule(10000, {
@@ -70,11 +66,12 @@ const start = async() => {
 
     app.use('/class/',express.static(path.join(__dirname,'image/class')))
 
+    app.use('/game',express.static(path.join(__dirname,'merfoset/index.html')))
     const httpServer = createServer(app)
 
     server.installSubscriptionHandlers(httpServer)
 
-    httpServer.timeout = 3000
+    httpServer.timeout = 5000
 
     httpServer.listen({port : process.env.PORT}, () => {
         console.log(`Graphql Server running at http://localhost:${process.env.PORT}/graphql`)
