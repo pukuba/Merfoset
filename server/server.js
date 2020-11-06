@@ -66,7 +66,7 @@ const start = async() => {
 
     app.use('/class/',express.static(path.join(__dirname,'image/class')))
 
-    app.use('/game',express.static(path.join(__dirname,'merfoset/index.html')))
+    app.use('/game',express.static(path.join(__dirname,'merfoset/')))
     const httpServer = createServer(app)
 
     server.installSubscriptionHandlers(httpServer)
